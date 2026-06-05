@@ -1,0 +1,29 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User account registration and farmer profile details",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The Firebase Auth unique identifier" },
+        "name": { "type": "string", "description": "Full name of the farmer" },
+        "email": { "type": "string", "description": "Email address of the farmer" },
+        "mobileNumber": { "type": "string", "description": "Mobile number of the farmer" },
+        "profilePhoto": { "type": "string", "description": "Profile picture URL or empty string" },
+        "state": { "type": "string", "description": "State" },
+        "district": { "type": "string", "description": "District" },
+        "village": { "type": "string", "description": "Village" },
+        "registrationDate": { "type": "string", "format": "date-time", "description": "Date and time of profile creation" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Database track for creation time" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Database track for update time" }
+      },
+      "required": ["uid", "name", "email", "mobileNumber", "state", "district", "village", "registrationDate"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Store the farmer profiles where document ID is the user's Auth UID"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Kisan AI Dost",
+  "description": "An AI-powered farmer's assistant featuring a crop health scanner, interactive crop calendar, seasonal agronomy adviser, and weather-driven dashboard.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

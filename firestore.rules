@@ -1,0 +1,67 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // 1. Global safety net interceptor
+    match /{document=**} {
+      allow read, write: if false;
+    }
+    
+    // Core helper primitives  
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+    
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+    
+    // 2. Strict Entity Schema Validation (Schema, Types, Boundaries, and Integrity)
+    function isValidUser(data) {
+      return data.keys().hasAll(['uid', 'name', 'email', 'mobileNumber', 'profilePhoto', 'state', 'district', 'village', 'registrationDate', 'createdAt', 'updatedAt'])
+        && data.keys().size() == 11
+        && data.uid == request.auth.uid
+        && data.name is string && data.name.size() <= 150
+        && data.email is string && data.email.size() <= 150
+        && data.mobileNumber is string && data.mobileNumber.size() <= 30
+        && data.profilePhoto is string && data.profilePhoto.size() <= 2000000
+        && data.state is string && data.state.size() <= 100
+        && data.district is string && data.district.size() <= 100
+        && data.village is string && data.village.size() <= 100
+        && data.registrationDate is string && data.registrationDate.size() <= 100
+        && data.createdAt == request.time
+        && data.updatedAt == request.time;
+    }
+
+    // Match rules for target collection
+    match /users/{userId} {
+      allow get: if isOwner(userId) && isValidId(userId);
+      
+      allow create: if isOwner(userId) 
+        && isValidId(userId)
+        && isValidUser(request.resource.data);
+        
+      allow update: if isOwner(userId)
+        && isValidId(userId)
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.registrationDate == resource.data.registrationDate
+        && request.resource.data.keys().hasAll(['uid', 'name', 'email', 'mobileNumber', 'profilePhoto', 'state', 'district', 'village', 'registrationDate', 'createdAt', 'updatedAt'])
+        && request.resource.data.keys().size() == 11
+        && request.resource.data.name is string && request.resource.data.name.size() <= 150
+        && request.resource.data.email is string && request.resource.data.email.size() <= 150
+        && request.resource.data.mobileNumber is string && request.resource.data.mobileNumber.size() <= 30
+        && request.resource.data.profilePhoto is string && request.resource.data.profilePhoto.size() <= 2000000
+        && request.resource.data.state is string && request.resource.data.state.size() <= 100
+        && request.resource.data.district is string && request.resource.data.district.size() <= 100
+        && request.resource.data.village is string && request.resource.data.village.size() <= 100
+        && request.resource.data.updatedAt == request.time;
+        
+      allow delete: if isOwner(userId) && isValidId(userId);
+    }
+  }
+}

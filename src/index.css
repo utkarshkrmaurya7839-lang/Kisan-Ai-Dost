@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Stunning agricultural ambient light animations */
+@keyframes bloomFloat {
+  0% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate(30px, -40px) scale(1.08) rotate(5deg);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95) rotate(-5deg);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes amberPulse {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes bioDrift {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+/* Beautiful dynamic cascading leaf flutter & float animations */
+@keyframes leafFloatLeft {
+  0% {
+    transform: translateY(110vh) translateX(0) rotate(0deg) scale(0.6);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-10vh) translateX(-80px) rotate(320deg) scale(1.1);
+    opacity: 0;
+  }
+}
+
+@keyframes leafFloatRight {
+  0% {
+    transform: translateY(110vh) translateX(0) rotate(0deg) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-10vh) translateX(100px) rotate(-280deg) scale(1.2);
+    opacity: 0;
+  }
+}
+
+@keyframes glowFlicker {
+  0%, 100% {
+    opacity: 0.35;
+    filter: drop-shadow(0 0 4px rgba(52, 211, 153, 0.3));
+  }
+  50% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 15px rgba(52, 211, 153, 0.8));
+  }
+}
+
+.animate-bloom-slow1 {
+  animation: bloomFloat 20s ease-in-out infinite;
+}
+
+.animate-bloom-slow2 {
+  animation: bloomFloat 25s ease-in-out infinite alternate;
+}
+
+.animate-amber-pulse {
+  animation: amberPulse 12s ease-in-out infinite;
+}
+
+.animate-drift-terrain {
+  animation: bioDrift 180s linear infinite;
+}
+
+.animate-leaf-left-slow {
+  animation: leafFloatLeft 28s linear infinite;
+}
+
+.animate-leaf-left-fast {
+  animation: leafFloatLeft 18s linear infinite;
+}
+
+.animate-leaf-right-slow {
+  animation: leafFloatRight 32s linear infinite;
+}
+
+.animate-leaf-right-fast {
+  animation: leafFloatRight 22s linear infinite;
+}
+
+.animate-glow-flicker {
+  animation: glowFlicker 4s ease-in-out infinite;
+}
+
+/* Premium dual Glassmorphism styles */
+.kisan-card-glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(16, 185, 129, 0.12);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+.dark .kisan-card-glass {
+  background: rgba(13, 27, 22, 0.78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(16, 185, 129, 0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+.kisan-input-glass {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+.dark .kisan-input-glass {
+  background: rgba(20, 38, 31, 0.6);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #fff;
+}
+
+.kisan-input-glass:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+/* Ambient glow nodes in 3D perspective */
+.ai-orb {
+  border-radius: 50%;
+  filter: blur(60px);
+  mix-blend-mode: plus-lighter;
+  pointer-events: none;
+}
+
+/* Clean utility indicators */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
